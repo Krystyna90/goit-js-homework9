@@ -22,7 +22,6 @@ const options = {
     const choosedDate = new Date(selectedDates).getTime();
 
     if (choosedDate < dateNow) {
-      // alert('Choose date in the future');
       Notiflix.Notify.warning('Choose the date in the future');
     }
     else {
@@ -36,9 +35,12 @@ const options = {
     start() {
       const startTime = choosedDate;
       startBtn.setAttribute('disabled', true);
-      setInterval(() => {
+      const timerId = setInterval(() => {
         const currentTime = Date.now();
         const deltaTime = startTime - currentTime;
+        if (deltaTime < 0) {
+          clearInterval(timerId);
+        }
         const { days, hours, minutes, seconds } = convertMs(deltaTime);
         updateTimer({ days, hours, minutes, seconds });
       }, 1000);
