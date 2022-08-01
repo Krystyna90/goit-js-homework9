@@ -39,11 +39,11 @@ function onCreatePromiseBtnClick(e) {
       .catch(({ position, delay }) => {
         position = i;
         delay = delayValue;
-          Notiflix.Notify.warning(`Rejected promise ${position} in ${delay}ms`);
+        Notiflix.Notify.warning(`Rejected promise ${position} in ${delay}ms`);
       });
 
     delayValue += step;
-    };
-  }
+  };
+}
 
 
