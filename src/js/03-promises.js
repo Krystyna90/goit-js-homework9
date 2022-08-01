@@ -15,10 +15,10 @@ function createPromise(position, delay) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
     if (shouldResolve) {
-      resolve(' Promise fulfilled successfuly');
+      resolve({position, delay});
     }
     else {
-      reject(' Promise is rejected');
+      reject({position, delay});
     }
   }, delay);
   })
@@ -30,20 +30,15 @@ function onCreatePromiseBtnClick(e) {
   let delayValue = Number(refs.delay.value);
   const step = Number(refs.step.value);
   for (let i = 1; i <= amount; i += 1) {
-    createPromise(i, delayValue)
+createPromise(i, delayValue)
       .then(({ position, delay }) => {
-        position = i;
-        delay = delayValue;
         Notiflix.Notify.success(`Fulfilled promise ${position} in ${delay}ms`);
       })
       .catch(({ position, delay }) => {
-        position = i;
-        delay = delayValue;
         Notiflix.Notify.warning(`Rejected promise ${position} in ${delay}ms`);
       });
-
-    delayValue += step;
-  };
+      delayValue += step;
+  }
 }
 
 
